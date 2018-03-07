@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Title</title>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/react.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/JSXTransformer.js"></script>
+        </head>
+<body>
+
+<!--taskList-->
+<script type="text/jsx">
+
+    var TaskList = React.createClass({
+
+        render: function() {
+
+            var displayTask = function(task){
+                return <li>{task}</li><button onClick={this.deleteTask}>Delete Task</button>
+            };
+
+            return (
+                    <ul>
+
+                        { this.props.items.map(displayTask)}
+
+                    </ul>
+            );
+        }
+
+    });
+
+</script>
+
+<!--taskDelete-->
+<script type="text/jsx">
+
+    var TaskDelete = React.createClass({
+
+        deleteTask: function() {
+
+            this.setState({
+
+                items: this.state.items.remove([this.state.task])
+
+            });
+        }
+
+    });
+
+</script>
+
+<!--taskApp-->
+<script type="text/jsx">
+
+
+
+    var TaskApp = React.createClass({
+
+        getInitialState: function() {
+            return {
+                items: [],
+
+                task: ''
+            };
+        },
+
+        addTask: function(e){
+
+            e.preventDefault();
+
+            this.setState({
+
+                items: this.state.items.concat([this.state.task]),
+
+                task: ''
+
+            });
+
+        },
+
+        onChange: function(e){
+            this.setState({task: e.target.value});
+        },
+
+        render: function() {
+            return (
+                    <div>
+
+                        <h1> My Dope Tasks Yo</h1>
+
+                        <TaskList items={this.state.items} />
+
+                        <form onSubmit={this.addTask}>
+
+                            <input onChange={this.onChange} value={this.state.task}/>
+
+                            <button>Add Task</button>
+
+                        </form>
+
+                    </div>
+            );
+        }
+
+    });
+
+    React.render(<TaskApp />, document.body);
+
+</script>
+
+
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>
